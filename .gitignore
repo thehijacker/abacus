@@ -63,3 +63,4 @@ service-account.json
 
 detox_test.sh
 artifacts/
+.DS_Store
