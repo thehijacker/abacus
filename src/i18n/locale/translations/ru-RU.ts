@@ -125,4 +125,30 @@ export default {
   currency: 'Валюта',
 
   home_all_accounts: 'Все счета',
+
+   // from 0.10.3
+  router_back_button: 'Назад',
+  transaction_clone: 'Клонировать',
+  transaction_delete: 'Удалить',
+
+  // from 0.11.0
+  configuration_credentials: 'Реквизиты',
+  configuration_manage_credentials: 'Управление реквизитами',
+  configuration_credentials_add_button: 'Добавить реквизиты',
+  logout: 'Выход',
+
+  // from 0.12.0
+  credential_clear_confirm_button: 'Удалить',
+  credential_clear_alert_title: 'Вы уверены?',
+  credential_clear_cancel_button: 'Отменить',
+  go_to_credentials: 'К реквизитам',
+
+  configuration_logout_alert_title: 'Выход',
+  load_more: 'Загрузить больше',
+
+  // from X.X.X
+  home_bills: 'Счета',
+  bills_paid: 'Оплаченные',
+  bills_not_expected: 'Не ожидается',
+  transaction_form_bill_label: 'Счёт',
 };
