@@ -315,6 +315,81 @@ function Bills() {
   );
 }
 
+function PiggyBanks() {
+  const { colors } = useThemeColors();
+  const piggyBanks = useSelector((state: RootState) => state.piggybank.piggyBanks);
+  const loading = useSelector((state: RootState) => state.loading.effects.piggybanks?.getPiggyBanks?.loading);
+  const dispatch = useDispatch<RootDispatch>();
+
+  return (
+    <AScrollView
+      showsVerticalScrollIndicator={false}
+      refreshControl={(
+        <RefreshControl
+          refreshing={false}
+          onRefresh={() => dispatch.piggybank.getPiggyBanks()}
+        />
+      )}
+    >
+      <AText fontSize={25} lineHeight={27} style={{ margin: 15 }}>
+        {translate('home_piggy_banks')}
+      </AText>
+      {piggyBanks.map((pb) => (
+        <AStack
+          key={pb.id}
+          mx={15}
+          style={{
+            height: 60,
+          }}
+        >
+          <AStackFlex row justifyContent="space-between">
+            <AStack
+              style={{ maxWidth: '80%' }}
+              alignItems="flex-start"
+            >
+              <AText fontSize={14} lineHeight={22} numberOfLines={1}>
+                {pb.attributes.name}
+              </AText>
+              <AText fontSize={12} lineHeight={20} numberOfLines={1}>
+                {localNumberFormat(pb.attributes.currencyCode, pb.attributes.currentAmount)}
+                {' / '}
+                {localNumberFormat(pb.attributes.currencyCode, pb.attributes.targetAmount)}
+              </AText>
+            </AStack>
+
+            <ASkeleton loading={loading}>
+              <AStack alignItems="flex-end">
+                <AStack
+                  px={6}
+                  py={2}
+                  backgroundColor={pb.attributes.leftToSave > 0.0 ? colors.brandNeutralLight : colors.brandSuccessLight}
+                  style={{ borderRadius: 5 }}
+                >
+                  <AText
+                    fontSize={15}
+                    numberOfLines={1}
+                    color={pb.attributes.leftToSave > 0.0 ? colors.brandNeutral : colors.brandSuccess}
+                    style={{ textAlign: 'center' }}
+                    bold
+                  >
+                    {`${pb.attributes.percentage.toFixed(0)}%`}
+                  </AText>
+                </AStack>
+              </AStack>
+            </ASkeleton>
+          </AStackFlex>
+
+          <AProgressBar
+            color={pb.attributes.percentage > 50.0 ? colors.green : colors.brandWarning}
+            value={pb.attributes.percentage}
+          />
+        </AStack>
+      ))}
+      <AView style={{ height: 150 }} />
+    </AScrollView>
+  );
+}
+
 function NetWorth() {
   const { colors } = useThemeColors();
   const hideBalance = useSelector((state: RootState) => state.configuration.hideBalance);
@@ -410,6 +485,7 @@ export default function HomeScreen() {
     <Ionicons key="pricetag" name="pricetags" size={22} color={colors.text} />,
     <MaterialCommunityIcons key="progress-check" name="progress-check" size={22} color={colors.text} />,
     <Ionicons key="calendar-clear" name="calendar-clear" size={22} color={colors.text} />,
+    <MaterialCommunityIcons key="piggy-bank" name="piggy-bank" size={22} color={colors.text} />,
   ];
 
   useEffect(() => {
@@ -438,6 +514,7 @@ export default function HomeScreen() {
           dispatch.categories.getInsightCategories();
           dispatch.budgets.getInsightBudgets();
           dispatch.bills.getBills();
+          dispatch.piggybank.getPiggyBanks();
         }
       };
 
@@ -511,6 +588,7 @@ export default function HomeScreen() {
             <InsightCategories key="2" />
             <InsightBudgets key="3" />
             <Bills key="4" />
+            <PiggyBanks key="5" />
           </AnimatedPagerView>
         </AView>
       </View>
