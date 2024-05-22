@@ -11,10 +11,10 @@ export default {
   cancel: 'Cancella',
   configuration_security: 'Sicurezza',
   configuration_share_feedback: 'Condividi un Feedback',
-  configuration_report_issue: 'Segnala una Issue',
-  configuration_sources: 'Sorgente',
+  configuration_report_issue: 'Segnala un problema',
+  configuration_sources: 'Codice sorgente',
   configuration_debug: 'Debug',
-  configuration_get_help: 'Help',
+  configuration_get_help: 'Aiuto',
   assetsHistoryCharts_chart_works: 'Questo grafico funziona meglio con 4 account.',
   assetsHistoryCharts_change_preferences: 'clicca qui',
   assetsHistoryCharts_choose_preferences_text: 'Per selezionare i tuoi account preferiti in Firefly III preferenze:',
@@ -33,8 +33,8 @@ export default {
   transaction_form_submit_button: 'Salva',
   transaction_list_alert_title: 'Sei sicuro?',
   transaction_list_alert_text: 'Questa transazione verrà rimossa permanentemente:',
-  transaction_list_delete_button: 'Cancella',
-  transaction_list_cancel_button: 'Cancel',
+  transaction_list_delete_button: 'Elimina',
+  transaction_list_cancel_button: 'Annulla',
   auth_form_url_label: 'Firefly III backend URL',
   auth_form_url_help: "senza '/' alla fine.",
   auth_form_url_placeholder: "Firefly III backend URL (senza '/' alla fine)",
@@ -45,7 +45,7 @@ export default {
   auth_form_need_help: 'Bisogno di aiuto?',
   auth_form_submit_button_initial: 'Log In',
   auth_form_submit_button_loading: 'Invio in corso...',
-  home_accounts: 'Accounts',
+  home_accounts: 'Conti',
   layout_new_update_header: 'Nuovo aggiornamento disponibile',
   layout_new_update_body_text: 'Puoi sempre aggiornare dopo dal pannello \"Impostazioni\".',
   layout_new_update_cancel_button: 'Cancel',
@@ -100,4 +100,50 @@ export default {
   auth_create_new_personal_access_token: 'Creare un nuovo Personal Access Token in OAuth tab, qui:',
   oauth_wrong_token_error_description: 'Fallita la validazione del accessToken, per favore ricontrolla il tuo token o l\'URL del backend.',
   transaction_screen_edit_title: 'Modifica Transazione',
+
+  // from 0.9.0
+  transaction_form_foreign_currency_label: 'Valuta estera',
+  transaction_form_group_title_label: 'Description of the split transaction',
+  transaction_form_group_title_placeholder: 'Titolo',
+  transaction_form_group_title_helper: 'If you create a split transaction, there must be a global description for all splits of the transaction.',
+  configuration_review_app_ios: 'Lascia una recensione',
+  configuration_review_app_android: 'Lascia una recensione',
+
+  // from 0.9.2
+  assets_history_chart: 'Accounts chart',
+  balance_history_chart: 'Net Worth chart',
+  balance_history_chart_no_data: 'Per accedere a questo grafico aggiorna FireflyIII all\'ultima verione.',
+  account_not_included_in_net_worth: '* Conto non incluso nel Patrimonio Netto.',
+
+  // from 0.10.0
+  period: 'Periodo',
+  currency: 'Valuta',
+
+  home_all_accounts: 'All Accounts',
+
+  // from 0.10.3
+  router_back_button: 'Indietro',
+  transaction_clone: 'Clona',
+  transaction_delete: 'Elimina',
+
+  // from 0.11.0
+  configuration_credentials: 'Credenziali',
+  configuration_manage_credentials: 'Gestione credenziali',
+  configuration_credentials_add_button: 'Aggiungi credenziali',
+  logout: 'Logout',
+
+  // from 0.12.0
+  credential_clear_confirm_button: 'Elimina',
+  credential_clear_alert_title: 'Sei sicuro?',
+  credential_clear_cancel_button: 'Annulla',
+  go_to_credentials: 'Vai alle credenziali',
+
+  configuration_logout_alert_title: 'Logout',
+  load_more: 'Load more',
+
+  // from X.X.X
+  home_bills: 'Bills',
+  bills_paid: 'Paid',
+  bills_not_expected: 'Not expected',
+  transaction_form_bill_label: 'Bill',
 };
