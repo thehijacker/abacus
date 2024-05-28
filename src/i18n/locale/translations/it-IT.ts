@@ -48,7 +48,7 @@ export default {
   home_accounts: 'Conti',
   layout_new_update_header: 'Nuovo aggiornamento disponibile',
   layout_new_update_body_text: 'Puoi sempre aggiornare dopo dal pannello \"Impostazioni\".',
-  layout_new_update_cancel_button: 'Cancel',
+  layout_new_update_cancel_button: 'Annulla',
   layout_new_update_update_button: 'Aggiorna adesso',
 
   // from version 0.31
@@ -103,15 +103,15 @@ export default {
 
   // from 0.9.0
   transaction_form_foreign_currency_label: 'Valuta estera',
-  transaction_form_group_title_label: 'Description of the split transaction',
+  transaction_form_group_title_label: 'Descrizione della transazione divisa',
   transaction_form_group_title_placeholder: 'Titolo',
-  transaction_form_group_title_helper: 'If you create a split transaction, there must be a global description for all splits of the transaction.',
+  transaction_form_group_title_helper: 'Se crei una transazione divisa, ci deve essere una descrizione globale per tutte le transazioni divise.',
   configuration_review_app_ios: 'Lascia una recensione',
   configuration_review_app_android: 'Lascia una recensione',
 
   // from 0.9.2
-  assets_history_chart: 'Accounts chart',
-  balance_history_chart: 'Net Worth chart',
+  assets_history_chart: 'Grafico conti',
+  balance_history_chart: 'Grafico del patrimonio netto',
   balance_history_chart_no_data: 'Per accedere a questo grafico aggiorna FireflyIII all\'ultima verione.',
   account_not_included_in_net_worth: '* Conto non incluso nel Patrimonio Netto.',
 
@@ -119,7 +119,7 @@ export default {
   period: 'Periodo',
   currency: 'Valuta',
 
-  home_all_accounts: 'All Accounts',
+  home_all_accounts: 'Tutti i conti',
 
   // from 0.10.3
   router_back_button: 'Indietro',
@@ -139,11 +139,11 @@ export default {
   go_to_credentials: 'Vai alle credenziali',
 
   configuration_logout_alert_title: 'Logout',
-  load_more: 'Load more',
+  load_more: 'Carica altro',
 
   // from X.X.X
-  home_bills: 'Bills',
-  bills_paid: 'Paid',
-  bills_not_expected: 'Not expected',
-  transaction_form_bill_label: 'Bill',
+  home_bills: 'Bollette',
+  bills_paid: 'Pagato',
+  bills_not_expected: 'Non attesa',
+  transaction_form_bill_label: 'Bolletta',
 };
