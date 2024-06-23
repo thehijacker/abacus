@@ -139,10 +139,8 @@ export default createModel<RootModel>()({
           dispatch.configuration.apiFetch({ url: '/api/v1/preferences/frontpageAccounts' }) as Promise<{ data: PreferenceType }>,
         ]);
         const filteredAccounts = accounts
-          .filter((a: AccountType) => a.attributes.active)
-          .filter((a: AccountType) => a.attributes.type != "initial-balance")
+          .filter((a: AccountType) => a.attributes.active && a.attributes.type !== 'initial-balance')
           .sort((a, b) => (b.attributes.name < a.attributes.name ? 1 : -1));
-        const accountMap = filteredAccounts.map((account, index) => account.attributes.currentBalance)
         if (frontpageAccounts) {
           accounts.forEach((a: AccountType, index) => {
             accounts[index].display = frontpageAccounts.attributes.data.includes(parseInt(a.id, 10));
