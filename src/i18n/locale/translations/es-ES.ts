@@ -62,4 +62,9 @@ export default {
 
   // from 0.7.0
   home_budgets: 'Presupuestos',
+
+  // from 0.19.0
+  configuration_theme: 'Personalización',
+  configuration_theme_selection: 'Cambiar tema de color',
+  configuration_theme_title: 'Temas de color',
 };

@@ -17,7 +17,8 @@ import {
 import {
   StyleSheet, Platform, View, Pressable,
 } from 'react-native';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import translate from '../i18n/locale';
 import { useThemeColors } from '../lib/common';
 
@@ -32,6 +33,7 @@ import TransactionsScreen from '../components/Screens/TransactionsScreen';
 import TransactionDetailScreen from '../components/Screens/TransactionDetailScreen';
 import ConfigurationScreen from '../components/Screens/ConfigurationScreen';
 import CredentialsScreen from '../components/Screens/CredentialsScreen';
+import ColorSelectionScreen from '../components/Screens/ColorSelectionScreen';
 
 // UI components
 import ABlurView from '../components/UI/ALibrary/ABlurView';
@@ -77,12 +79,13 @@ const styles = StyleSheet.create({
 function TabBarPrimaryButton() {
   const navigation = useNavigation();
   const { colors } = useThemeColors();
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
 
   return (
     <AStack justifyContent="flex-start">
       <AIconButton
         testID="navigation_create_transaction"
-        backgroundColor={colors.brandStyle}
+        backgroundColor={selectedBrandStyle}
         icon={<AntDesign name="plus" color="white" size={22} />}
         onPress={() => navigation.dispatch(
           CommonActions.navigate({
@@ -224,6 +227,7 @@ function PrimaryButtonComponent() {
 
 function Home() {
   const { colors } = useThemeColors();
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
 
   return (
     <>
@@ -232,7 +236,7 @@ function Home() {
         screenOptions={() => ({
           tabBarInactiveBackgroundColor: colors.tabBackgroundColor,
           tabBarActiveBackgroundColor: colors.tabBackgroundColor,
-          tabBarActiveTintColor: colors.brandStyle,
+          tabBarActiveTintColor: selectedBrandStyle,
           tabBarInactiveTintColor: colors.tabInactiveDarkLight,
           tabBarHideOnKeyboard: true,
           headerShown: false,
@@ -329,6 +333,23 @@ export default function Index() {
         <Stack.Screen
           name="dashboard"
           component={Home}
+        />
+        <Stack.Screen
+          name="ColorSelectionScreen"
+          component={ColorSelectionScreen}
+          options={{
+            headerShown: true,
+            headerTitle: translate('configuration_theme_title'),
+            headerBackTitleVisible: true,
+            headerBackTitle: translate('router_back_button'),
+            headerBackTitleStyle: {
+              fontFamily: 'Montserrat-Bold',
+            },
+            headerTintColor: colors.text,
+            headerStyle: {
+              backgroundColor: colors.tileBackgroundColor,
+            },
+          }}
         />
         <ModalStack.Group
           screenOptions={{

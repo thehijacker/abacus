@@ -37,6 +37,7 @@ export default function ConfigurationScreen({ navigation }: ScreenType) {
   const backendURL = useSelector((state: RootState) => state.configuration.backendURL);
   const useBiometricAuth = useSelector((state: RootState) => state.configuration.useBiometricAuth);
   const dispatch = useDispatch<RootDispatch>();
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
   const {
     configuration: {
       setUseBiometricAuth,
@@ -187,7 +188,7 @@ export default function ConfigurationScreen({ navigation }: ScreenType) {
           }}
         >
           <AText fontSize={14}>{translate('auth_form_biometrics_lock')}</AText>
-          <Switch thumbColor="white" trackColor={{ false: '#767577', true: colors.brandStyle }} onValueChange={() => bioAuthCallback(setUseBiometricAuth)} value={useBiometricAuth} />
+          <Switch thumbColor="white" trackColor={{ false: '#767577', true: selectedBrandStyle }} onValueChange={() => bioAuthCallback(setUseBiometricAuth)} value={useBiometricAuth} />
         </AStack>
       </AView>
 
@@ -302,8 +303,37 @@ export default function ConfigurationScreen({ navigation }: ScreenType) {
           }}
         >
           <AText fontSize={14}>{translate('close_after_transaction')}</AText>
-          <Switch thumbColor="white" trackColor={{ false: '#767577', true: colors.brandStyle }} onValueChange={handleCheckBoxChange} value={closeTransactionScreen} />
+          <Switch thumbColor="white" trackColor={{ false: '#767577', true: selectedBrandStyle }} onValueChange={handleCheckBoxChange} value={closeTransactionScreen} />
         </AStack>
+      </AView>
+
+      <AText py={10} px={10} fontSize={18} bold>
+        {translate('configuration_theme')}
+      </AText>
+      <AView
+        style={{
+          borderTopWidth: 0.5,
+          borderBottomWidth: 0.5,
+          borderColor: colors.listBorderColor,
+          backgroundColor: colors.tileBackgroundColor,
+        }}
+      >
+        <APressable
+          flexDirection="row"
+          onPress={() => navigation.navigate('ColorSelectionScreen', { filterType: '', selectFilter: () => {} })}
+          style={{
+            justifyContent: 'space-between',
+            height: 45,
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            marginLeft: 10,
+            borderBottomWidth: 0.5,
+            borderColor: colors.listBorderColor,
+          }}
+        >
+          <AText fontSize={14}>{translate('configuration_theme_selection')}</AText>
+          <FontAwesome name="angle-right" size={22} color="gray" />
+        </APressable>
       </AView>
 
       <AText py={10} px={10} fontSize={18} bold>

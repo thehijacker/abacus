@@ -150,5 +150,10 @@ export default {
   bills_not_expected: 'Not expected',
   transaction_form_bill_label: 'Bill',
   configuration_transaction_form: 'Transaction Form',
-  close_after_transaction: 'Close transaction form after submission'
+  close_after_transaction: 'Close transaction form after submission',
+
+  // from 0.19.0
+  configuration_theme: 'Customization',
+  configuration_theme_selection: 'Change color theme',
+  configuration_theme_title: 'Color themes',
 };

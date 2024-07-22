@@ -47,7 +47,7 @@ export default {
   auth_form_submit_button_loading: 'Invio in corso...',
   home_accounts: 'Conti',
   layout_new_update_header: 'Nuovo aggiornamento disponibile',
-  layout_new_update_body_text: 'Puoi sempre aggiornare dopo dal pannello \"Impostazioni\".',
+  layout_new_update_body_text: 'Puoi sempre aggiornare dopo dal pannello "Impostazioni".',
   layout_new_update_cancel_button: 'Annulla',
   layout_new_update_update_button: 'Aggiorna adesso',
 
@@ -146,4 +146,9 @@ export default {
   bills_paid: 'Pagato',
   bills_not_expected: 'Non attesa',
   transaction_form_bill_label: 'Bolletta',
+
+  // from 0.19.0
+  configuration_theme: 'Personalizzazione',
+  configuration_theme_selection: 'Cambia tema colore',
+  configuration_theme_title: 'Temi colore',
 };

@@ -10,8 +10,10 @@ import { useThemeColors } from '../../lib/common';
 import { ScreenType } from '../../types/screen';
 import { types } from '../../models/transactions';
 import translate from '../../i18n/locale';
+
 export default function FilterScreen({ navigation, route }: ScreenType) {
   const { colors } = useThemeColors();
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
   const {
     filterType,
     selectFilter,
@@ -96,7 +98,7 @@ export default function FilterScreen({ navigation, route }: ScreenType) {
             }}
           >
             <View style={{
-              backgroundColor: selectedAccountIds?.includes(parseInt(account.id, 10)) ? colors.brandStyle : colors.filterBorderColor,
+              backgroundColor: selectedAccountIds?.includes(parseInt(account.id, 10)) ? selectedBrandStyle : colors.filterBorderColor,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 10,

@@ -293,45 +293,55 @@ export default createModel<RootModel>()({
         accounts: {
           selectedAccountIds,
         },
+        configuration: {
+          selectedBrandStyle,
+        },
       } = rootState;
 
       const accountIdsParam = (selectedAccountIds && selectedAccountIds.length > 0) ? `&accounts[]=${selectedAccountIds.join('&accounts[]=')}` : '';
       const { data: accounts } = await dispatch.configuration.apiFetch({ url: `/api/v1/chart/account/overview?start=${start}&end=${end}${accountIdsParam}` }) as { data: AssetAccountType[] };
       let colorIndex = 0;
 
-      accounts
-        .forEach((v, index) => {
+      accounts.forEach((v, index) => {
+        if (index === 0) {
+          accounts[index].color = selectedBrandStyle;
+        } else {
           if (colorIndex >= 6) {
             colorIndex = 0;
           }
           accounts[index].color = colors[`brandStyle${colorIndex}`];
-          accounts[index].colorScheme = `chart${colorIndex}`;
           colorIndex += 1;
-          accounts[index].entries = range > 3 ? Object.keys(v.entries)
-            .filter((e, i) => i % 2 === 0)
-            .filter((e, i) => i % 2 === 0)
-            .filter((e, i) => i % 2 === 0)
-            .map((key) => {
-              const value = parseFloat(accounts[index].entries[key]);
-              const date = new Date(key);
+        }
+        accounts[index].colorScheme = `chart${colorIndex}`;
+        accounts[index].colorScheme = `chart${colorIndex}`;
+        colorIndex += 1;
+        accounts[index].colorScheme = `chart${colorIndex}`;
+        colorIndex += 1;
+        accounts[index].entries = range > 3 ? Object.keys(v.entries)
+          .filter((e, i) => i % 2 === 0)
+          .filter((e, i) => i % 2 === 0)
+          .filter((e, i) => i % 2 === 0)
+          .map((key) => {
+            const value = parseFloat(accounts[index].entries[key]);
+            const date = new Date(key);
 
-              return {
-                x: +date,
-                y: value,
-              };
-            })
-            : Object.keys(v.entries).map((key) => {
-              const value = parseFloat(accounts[index].entries[key]);
-              const date = new Date(key);
+            return {
+              x: +date,
+              y: value,
+            };
+          })
+          : Object.keys(v.entries).map((key) => {
+            const value = parseFloat(accounts[index].entries[key]);
+            const date = new Date(key);
 
-              return {
-                x: +date,
-                y: value,
-              };
-            });
-          accounts[index].maxY = maxBy(accounts[index].entries, (o: { x: number, y: number }) => (o.y)).y;
-          accounts[index].minY = minBy(accounts[index].entries, (o: { x: number, y: number }) => (o.y)).y;
-        });
+            return {
+              x: +date,
+              y: value,
+            };
+          });
+        accounts[index].maxY = maxBy(accounts[index].entries, (o: { x: number, y: number }) => (o.y)).y;
+        accounts[index].minY = minBy(accounts[index].entries, (o: { x: number, y: number }) => (o.y)).y;
+      });
 
       dispatch.firefly.setData({ accounts: accounts.filter((account) => account.currencyCode === currentCode) });
     },

@@ -130,4 +130,9 @@ export default {
   router_back_button: 'Voltar',
   transaction_clone: 'Clonar',
   transaction_delete: 'Apagar',
+
+  // from 0.19.0
+  configuration_theme: 'Personalização',
+  configuration_theme_selection: 'Alterar tema de cores',
+  configuration_theme_title: 'Temas de cores',
 };

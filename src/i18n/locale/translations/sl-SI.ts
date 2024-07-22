@@ -123,4 +123,9 @@ export default {
   // from 0.10.0
   period: 'Obdobje',
   currency: 'Valuta',
+
+  // from 0.19.0
+  configuration_theme: 'Prilagoditev',
+  configuration_theme_selection: 'Spremeni barvno temo',
+  configuration_theme_title: 'Barvne teme',
 };

@@ -130,4 +130,9 @@ export default {
   router_back_button: '返回',
   transaction_clone: '克隆',
   transaction_delete: '删除',
+
+  // from 0.19.0
+  configuration_theme: '定制',
+  configuration_theme_selection: '更改颜色主题',
+  configuration_theme_title: '颜色主题',
 };

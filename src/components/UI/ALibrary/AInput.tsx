@@ -4,10 +4,12 @@ import {
   TextInput,
   TextInputFocusEventData,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { AStyle } from './types';
 import AStack from './AStack';
 import { useThemeColors } from '../../../lib/common';
 import AView from './AView';
+import { RootState } from '../../../store';
 
 type AInputType = {
   height?: number
@@ -52,9 +54,18 @@ export default function AInput({
 }: AInputType) {
   const { colors } = useThemeColors();
   const [isFocused, setIsFocused] = React.useState(false);
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
   const handleFocus = (focusState: boolean, callback: () => void) => {
     setIsFocused(focusState);
     callback();
+  };
+
+  const selectedBrandStyleWithAlpha = (hexColor, alpha) => {
+    const color = hexColor.replace('#', '');
+    const r = parseInt(color.substring(0, 2), 16);
+    const g = parseInt(color.substring(2, 4), 16);
+    const b = parseInt(color.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   };
 
   return (
@@ -63,8 +74,8 @@ export default function AInput({
       style={{
         width: '100%',
         borderRadius: 10,
-        borderColor: isFocused ? colors.brandStyle : colors.listBorderColor,
-        backgroundColor: isFocused ? 'rgba(255,85,51,0.10)' : 'transparent',
+        borderColor: isFocused ? selectedBrandStyle : colors.listBorderColor,
+        backgroundColor: isFocused ? selectedBrandStyleWithAlpha(selectedBrandStyle, 0.1) : 'transparent',
         borderWidth: 1,
         ...style,
       }}

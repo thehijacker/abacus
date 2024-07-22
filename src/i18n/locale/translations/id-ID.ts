@@ -85,4 +85,9 @@ export default {
 
   // from 0.7.0
   home_budgets: 'Anggaran',
+
+  // from 0.19.0
+  configuration_theme: 'Kustomisasi',
+  configuration_theme_selection: 'Ganti tema warna',
+  configuration_theme_title: 'Tema warna',
 };

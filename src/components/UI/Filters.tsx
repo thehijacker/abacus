@@ -22,6 +22,7 @@ export default function Filters() {
   const range = useSelector((state: RootState) => state.firefly.rangeDetails.range);
   const accounts = useSelector((state: RootState) => state.accounts.accounts);
   const selectedAccountIds = useSelector((state: RootState) => state.accounts.selectedAccountIds);
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
   const {
     firefly: {
       setRange,
@@ -70,7 +71,7 @@ export default function Filters() {
             }}
           >
             <View style={{
-              backgroundColor: currentCode === currency.attributes.code ? colors.brandStyle : colors.filterBorderColor,
+              backgroundColor: currentCode === currency.attributes.code ? selectedBrandStyle : colors.filterBorderColor,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 10,
@@ -151,7 +152,7 @@ export default function Filters() {
             }}
           >
             <View style={{
-              backgroundColor: selectedAccountIds?.includes(parseInt(account.id, 10)) ? colors.brandStyle : colors.filterBorderColor,
+              backgroundColor: selectedAccountIds?.includes(parseInt(account.id, 10)) ? selectedBrandStyle : colors.filterBorderColor,
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 10,

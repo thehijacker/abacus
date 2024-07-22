@@ -85,12 +85,12 @@ export default {
   home_header_time_range_q: 'T', // Put an abbreviation that best represents a quarter
   home_header_time_range_s: 'S', // Put an abbreviation that best represents a semiannual
 
-// from 0.6.0
+  // from 0.6.0
   balance: 'Solde',
   history: 'Historique',
   home_categories: 'Catégories',
   home_net_worth: 'Valeur Nette',
-  
+
   // from 0.7.0
   home_budgets: 'Budgets',
   configuration_ui: 'Interface Utilisateur',
@@ -102,7 +102,7 @@ export default {
   auth_create_new_personal_access_token: 'Créer un nouveau Jeton d\'Accès Personnel dans l\'onglet OAuth, ici :',
   oauth_wrong_token_error_description: 'Échec de la validation de l\'accessToken, veuillez vérifier votre jeton ou l\'URL du backend.',
   transaction_screen_edit_title: 'Modifier la Transaction',
-  
+
   // from 0.9.0
   transaction_form_foreign_currency_label: 'Devise étrangère',
   transaction_form_group_title_label: 'Description de la transaction divisée',
@@ -110,39 +110,39 @@ export default {
   transaction_form_group_title_helper: 'Si vous créez une transaction divisée, il doit y avoir une description globale pour toutes les divisions de la transaction.',
   configuration_review_app_ios: 'Évaluer Abacus sur l\'AppStore',
   configuration_review_app_android: 'Évaluer Abacus sur Google Play',
-  
+
   // from 0.9.2
   assets_history_chart: 'Graphique des comptes',
   balance_history_chart: 'Graphique de la Valeur Nette',
   balance_history_chart_no_data: 'Pour accéder à ce graphique, veuillez mettre à jour FireflyIII à la dernière version.',
   account_not_included_in_net_worth: '* Compte non inclus dans la Valeur Nette.',
-  
+
   // from 0.10.0
   period: 'Période',
   currency: 'Devise',
-  
+
   home_all_accounts: 'Tous les Comptes',
-  
+
   // from 0.10.3
   router_back_button: 'Retour',
   transaction_clone: 'Cloner',
   transaction_delete: 'Supprimer',
-  
+
   // from 0.11.0
   configuration_credentials: 'Identifiants',
   configuration_manage_credentials: 'Gérer les Identifiants',
   configuration_credentials_add_button: 'Ajouter un Identifiant',
   logout: 'Déconnexion',
-  
+
   // from 0.12.0
   credential_clear_confirm_button: 'Supprimer',
   credential_clear_alert_title: 'Êtes-vous sûr ?',
   credential_clear_cancel_button: 'Annuler',
   go_to_credentials: 'Aller aux Identifiants',
-  
+
   configuration_logout_alert_title: 'Déconnexion',
   load_more: 'Charger plus',
-  
+
   // from X.X.X
   home_bills: 'Factures',
   home_piggy_banks: 'Tirelires',
@@ -150,5 +150,10 @@ export default {
   bills_not_expected: 'Non attendu',
   transaction_form_bill_label: 'Facture',
   configuration_transaction_form: 'Formulaire',
-  close_after_transaction: 'Fermer la transaction après l\'avoir envoyé'
+  close_after_transaction: 'Fermer la transaction après l\'avoir envoyé',
+
+  // from 0.19.0
+  configuration_theme: 'Personnalisation',
+  configuration_theme_selection: 'Changer le thème de couleur',
+  configuration_theme_title: 'Thèmes de couleur',
 };

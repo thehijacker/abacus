@@ -47,7 +47,7 @@ export default {
   auth_form_submit_button_initial: 'Einloggen',
   auth_form_submit_button_loading: 'Wird eingereicht...',
   auth_form_biometrics_lock: 'Biometrische Sperre',
-  home_accounts: 'Asset-Konten',
+  home_accounts: 'Bestandskonten',
   layout_new_update_header: 'Neues Update verfügbar',
   layout_new_update_body_text: 'Du kannst später jederzeit im Einstellungen-Tab aktualisieren.',
   layout_new_update_cancel_button: 'Abbrechen',
@@ -150,5 +150,10 @@ export default {
   bills_not_expected: 'Nicht erwartet',
   transaction_form_bill_label: 'Rechnung',
   configuration_transaction_form: 'Transaktionsformular',
-  close_after_transaction: 'Schließe das Transaktionsformular nach dem Einreichen'
+  close_after_transaction: 'Transaktionsformular nach Einreichen schließen',
+
+  // from 0.19.0
+  configuration_theme: 'Anpassung',
+  configuration_theme_selection: 'Farbthema ändern',
+  configuration_theme_title: 'Farben',
 };

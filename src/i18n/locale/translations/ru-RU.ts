@@ -126,7 +126,7 @@ export default {
 
   home_all_accounts: 'Все счета',
 
-   // from 0.10.3
+  // from 0.10.3
   router_back_button: 'Назад',
   transaction_clone: 'Клонировать',
   transaction_delete: 'Удалить',
@@ -151,4 +151,9 @@ export default {
   bills_paid: 'Оплаченные',
   bills_not_expected: 'Не ожидается',
   transaction_form_bill_label: 'Счёт',
+
+  // from 0.19.0
+  configuration_theme: 'Настройка',
+  configuration_theme_selection: 'Изменить цветовую тему',
+  configuration_theme_title: 'Цветовые темы',
 };

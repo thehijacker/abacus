@@ -130,4 +130,9 @@ export default {
   router_back_button: 'Back',
   transaction_clone: 'Clone',
   transaction_delete: 'Delete',
+
+  // from 0.19.0
+  configuration_theme: 'Tùy chỉnh',
+  configuration_theme_selection: 'Thay đổi chủ đề màu',
+  configuration_theme_title: 'Chủ đề màu',
 };

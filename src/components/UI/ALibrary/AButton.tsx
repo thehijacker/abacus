@@ -1,7 +1,9 @@
 import React from 'react';
 import { ActivityIndicator, Pressable } from 'react-native';
+import { useSelector } from 'react-redux';
 import { AStyle } from './types';
 import { useThemeColors } from '../../../lib/common';
+import { RootState } from '../../../store';
 
 interface AButtonType {
   type?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' | 'light' | 'dark' | 'transparent'
@@ -29,7 +31,8 @@ export default function AButton({
   testID = null,
 }: AButtonType) {
   const { colors } = useThemeColors();
-  const backgroundColor = colors[type];
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
+  const backgroundColor = type === 'primary' ? selectedBrandStyle : colors[type];
 
   return (
     <Pressable

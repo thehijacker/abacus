@@ -42,6 +42,7 @@ export default function OauthForm({
   const loading = useSelector((state: RootState) => state.loading.effects.firefly.getNewAccessToken?.loading);
   const [isOauth, setIsAuth] = useState<boolean>(true);
   const toggleIsOauth = () => setIsAuth((value) => !value);
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
   const isMinimumRequirement = () => {
     if (isOauth && config.oauthClientId) {
       return true;
@@ -110,7 +111,7 @@ export default function OauthForm({
 
           <AStackFlex row py={10} alignItems="center" justifyContent="space-between">
             <AText fontSize={12}>{translate('auth_use_personal_access_token')}</AText>
-            <Switch testID="toggle_is_oauth" thumbColor="white" trackColor={{ false: '#767577', true: colors.brandStyle }} onValueChange={() => toggleIsOauth()} value={!isOauth} />
+            <Switch testID="toggle_is_oauth" thumbColor="white" trackColor={{ false: '#767577', true: selectedBrandStyle }} onValueChange={() => toggleIsOauth()} value={!isOauth} />
           </AStackFlex>
 
           {isOauth && (
@@ -136,7 +137,7 @@ export default function OauthForm({
                   flexDirection: 'row',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  backgroundColor: colors.brandStyle,
+                  backgroundColor: selectedBrandStyle,
                   borderRadius: 10,
                   marginLeft: 10,
                   paddingRight: 7,

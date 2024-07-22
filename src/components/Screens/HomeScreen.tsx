@@ -44,6 +44,7 @@ function AssetsAccounts() {
   const displayAllAccounts = useSelector((state: RootState) => state.configuration.displayAllAccounts);
   const loading = useSelector((state: RootState) => state.loading.effects.accounts.getAccounts?.loading);
   const dispatch = useDispatch<RootDispatch>();
+  const selectedBrandStyle = useSelector((state: RootState) => state.configuration.selectedBrandStyle || colors.brandStyleOrange);
 
   const onSwitch = async (bool: boolean) => {
     dispatch.configuration.setDisplayAllAccounts(bool);
@@ -98,29 +99,29 @@ function AssetsAccounts() {
           <AText fontSize={25} lineHeight={27} style={{ margin: 15 }} bold>
             {displayAllAccounts ? translate('home_all_accounts') : translate('home_accounts')}
           </AText>
-          <Switch style={{ marginHorizontal: 10 }} thumbColor="white" trackColor={{ false: '#767577', true: colors.brandStyle }} onValueChange={onSwitch} value={displayAllAccounts} />
+          <Switch style={{ marginHorizontal: 10 }} thumbColor="white" trackColor={{ false: '#767577', true: selectedBrandStyle }} onValueChange={onSwitch} value={displayAllAccounts} />
         </AStack>
         <AStack px={5} row justifyContent="space-between">
-        <View style={{ flex: 1, alignItems: 'flex-start', paddingLeft: '5%'  }}>
-          <TouchableOpacity onPress={() => handleSortPress('left')}>
-            <MaterialCommunityIcons
-              name="sort"
-              size={22}
-              color={lastPressed === 'left' ? colors.primary : colors.text}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={{ flex: 1, alignItems: 'flex-end', paddingRight: '5%' }}>
-          <TouchableOpacity onPress={() => handleSortPress('right')}>
-            <MaterialCommunityIcons
-              name="sort"
-              size={22}
-              color={lastPressed === 'right' ? colors.primary : colors.text}
-              style={{ transform: [{ scaleX: -1 }] }}
-            />
-          </TouchableOpacity>
-        </View>
-      </AStack>
+          <View style={{ flex: 1, alignItems: 'flex-start', paddingLeft: '5%' }}>
+            <TouchableOpacity onPress={() => handleSortPress('left')}>
+              <MaterialCommunityIcons
+                name="sort"
+                size={22}
+                color={lastPressed === 'left' ? selectedBrandStyle : colors.text}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1, alignItems: 'flex-end', paddingRight: '5%' }}>
+            <TouchableOpacity onPress={() => handleSortPress('right')}>
+              <MaterialCommunityIcons
+                name="sort"
+                size={22}
+                color={lastPressed === 'right' ? selectedBrandStyle : colors.text}
+                style={{ transform: [{ scaleX: -1 }] }}
+              />
+            </TouchableOpacity>
+          </View>
+        </AStack>
         {sortedAccounts.map((account, index) => (
           <AStack
             key={account.id}
@@ -463,43 +464,43 @@ function NetWorth() {
     <View testID="home_screen_net_worth">
       <Pressable onPress={() => dispatch.configuration.setHideBalance(!hideBalance)}>
         {!hideBalance && (
-        <AView style={{
-          height: 90,
-          width: 300,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        >
-          <AText fontSize={12} lineHeight={18}>
-            {`${translate('home_net_worth')} • ${currentCode}`}
-          </AText>
-          <ASkeleton loading={loading}>
-            <AText fontSize={35} lineHeight={37} bold>
-              {localNumberFormat(currentCode, parseFloat(netWorth[0]?.monetaryValue || '0'))}
+          <AView style={{
+            height: 90,
+            width: 300,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          >
+            <AText fontSize={12} lineHeight={18}>
+              {`${translate('home_net_worth')} • ${currentCode}`}
             </AText>
-          </ASkeleton>
-
-          {balance && balance[0] && earned && earned[0] && spent && spent[0] && !hideBalance && (
-          <ASkeleton loading={loading}>
-            <AStack
-              py={0}
-              my={1}
-              px={5}
-              backgroundColor={parseFloat(balance[0].monetaryValue) < 0 ? colors.brandNeutralLight : colors.brandSuccessLight}
-              style={{ borderRadius: 5 }}
-            >
-              <AText
-                py={0}
-                bold
-                fontSize={12}
-                color={parseFloat(balance[0].monetaryValue) < 0 ? colors.brandNeutral : colors.brandSuccess}
-              >
-                {`${parseFloat(balance[0].monetaryValue) > 0 ? '+' : ''}${localNumberFormat(balance[0].currencyCode, parseFloat(balance[0].monetaryValue))}`}
+            <ASkeleton loading={loading}>
+              <AText fontSize={35} lineHeight={37} bold>
+                {localNumberFormat(currentCode, parseFloat(netWorth[0]?.monetaryValue || '0'))}
               </AText>
-            </AStack>
-          </ASkeleton>
-          )}
-        </AView>
+            </ASkeleton>
+
+            {balance && balance[0] && earned && earned[0] && spent && spent[0] && !hideBalance && (
+              <ASkeleton loading={loading}>
+                <AStack
+                  py={0}
+                  my={1}
+                  px={5}
+                  backgroundColor={parseFloat(balance[0].monetaryValue) < 0 ? colors.brandNeutralLight : colors.brandSuccessLight}
+                  style={{ borderRadius: 5 }}
+                >
+                  <AText
+                    py={0}
+                    bold
+                    fontSize={12}
+                    color={parseFloat(balance[0].monetaryValue) < 0 ? colors.brandNeutral : colors.brandSuccess}
+                  >
+                    {`${parseFloat(balance[0].monetaryValue) > 0 ? '+' : ''}${localNumberFormat(balance[0].currencyCode, parseFloat(balance[0].monetaryValue))}`}
+                  </AText>
+                </AStack>
+              </ASkeleton>
+            )}
+          </AView>
         )}
 
         {hideBalance && (
@@ -538,6 +539,11 @@ export default function HomeScreen() {
   const end = useSelector((state: RootState) => state.firefly.rangeDetails.end);
   const currentCode = useSelector((state: RootState) => state.currencies.currentCode);
   const dispatch = useDispatch<RootDispatch>();
+  const selectedTheme = useSelector((state: RootState) => state.configuration.selectedTheme || 'gradientOrange');
+  const lightSelectedColor = colors[`${selectedTheme}Light`] || colors.gradientOrangeLight;
+  const darkSelectedColor = colors[`${selectedTheme}Dark`] || colors.gradientOrangeDark;
+  const gradientColors = colorScheme === 'light' ? lightSelectedColor : darkSelectedColor;
+
   const renderIcons = [
     <Ionicons key="wallet" name="wallet" size={22} color={colors.text} />,
     <Ionicons key="pricetag" name="pricetags" size={22} color={colors.text} />,
@@ -593,7 +599,7 @@ export default function HomeScreen() {
   return (useMemo(() => (
     <AView style={{ flex: 1 }}>
       <LinearGradient
-        colors={colorScheme === 'light' ? ['rgb(255,211,195)', 'rgb(255,194,183)', 'rgb(248,199,193)', 'rgb(255,228,194)'] : ['#790277', '#d30847', '#FF5533', '#efe96d']}
+        colors={gradientColors}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
         style={{ minHeight: 250 + safeAreaInsets.top, paddingTop: safeAreaInsets.top }}

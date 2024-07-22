@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 
 import { RootModel } from './index';
 import { convertKeysToCamelCase } from '../lib/common';
+import colors from '../constants/colors';
 
 type ConfigurationStateType = {
   backendURL: string
@@ -13,6 +14,8 @@ type ConfigurationStateType = {
   apiVersion: string
   serverVersion: string
   closeTransactionScreen: boolean
+  selectedTheme: string
+  selectedBrandStyle: string
 }
 
 type FireflyIIIApiResponse = {
@@ -49,6 +52,8 @@ const INITIAL_STATE = {
   apiVersion: '',
   serverVersion: '',
   closeTransactionScreen: false,
+  selectedTheme: 'gradientOrange',
+  selectedBrandStyle: colors.brandStyleOrange,
 } as ConfigurationStateType;
 
 export default createModel<RootModel>()({
@@ -107,6 +112,19 @@ export default createModel<RootModel>()({
       return {
         ...state,
         closeTransactionScreen,
+      };
+    },
+    setSelectedTheme(state, selectedTheme: string): ConfigurationStateType {
+      return {
+        ...state,
+        selectedTheme,
+      };
+    },
+
+    setSelectedBrandStyle(state, selectedBrandStyle: string): ConfigurationStateType {
+      return {
+        ...state,
+        selectedBrandStyle,
       };
     },
   },
