@@ -131,6 +131,11 @@ export default {
   transaction_clone: 'Clonar',
   transaction_delete: 'Apagar',
 
+  // from X.X.X
+  bills_paid: 'Pago até',
+  due_by: 'Vence em',
+  date_unavailable: 'aviso prévio',
+
   // from 0.19.0
   configuration_theme: 'Personalização',
   configuration_theme_selection: 'Alterar tema de cores',

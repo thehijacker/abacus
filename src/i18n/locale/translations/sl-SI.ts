@@ -124,6 +124,11 @@ export default {
   period: 'Obdobje',
   currency: 'Valuta',
 
+  // from X.X.X
+  bills_paid: 'Plačano do',
+  due_by: 'Zapadlost do',
+  date_unavailable: 'obvestila',
+
   // from 0.19.0
   configuration_theme: 'Prilagoditev',
   configuration_theme_selection: 'Spremeni barvno temo',

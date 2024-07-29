@@ -148,7 +148,9 @@ export default {
 
   // from X.X.X
   home_bills: 'Счета',
-  bills_paid: 'Оплаченные',
+  bills_paid: 'Оплачено до',
+  due_by: 'Срок до',
+  date_unavailable: 'уведомления',
   bills_not_expected: 'Не ожидается',
   transaction_form_bill_label: 'Счёт',
 

@@ -21,10 +21,10 @@ import PagerView from 'react-native-pager-view';
 
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import moment from 'moment';
 import { RootDispatch, RootState } from '../../store';
 import translate from '../../i18n/locale';
 import { localNumberFormat, useThemeColors } from '../../lib/common';
-import BillListItem from '../UI/Bills/BillListItem';
 
 import Pagination from '../UI/Pagination';
 import {
@@ -298,24 +298,31 @@ function InsightBudgets() {
   );
 }
 
+function formatDate(date) {
+  if (!date) {
+    return translate('date_unavailable');
+  }
+  const momentDate = moment(date);
+  const formattedDate = momentDate.isValid() ? momentDate.format('LL') : translate('date_unavailable');
+  return formattedDate;
+}
+
 function Bills() {
   const { colors } = useThemeColors();
-
-  const billsSummary = useSelector((state: RootState) => state.firefly.bills);
   const bills = useSelector((state: RootState) => state.bills.bills);
   const loading = useSelector((state: RootState) => state.loading.effects.bills?.getBills?.loading);
   const dispatch = useDispatch<RootDispatch>();
 
-  const totalPaid = useMemo(() => parseFloat(billsSummary?.paid?.monetaryValue || '0'), [billsSummary]);
-  const totalUnpaid = useMemo(() => Math.abs(parseFloat(billsSummary?.unpaid?.monetaryValue || '0')), [billsSummary]);
-  const total = useMemo(() => totalPaid + totalUnpaid, [totalPaid, totalUnpaid]);
+  useEffect(() => {
+    dispatch.bills.getBills();
+  }, [dispatch]);
 
   return (
     <AScrollView
       showsVerticalScrollIndicator={false}
       refreshControl={(
         <RefreshControl
-          refreshing={false}
+          refreshing={loading}
           onRefresh={() => Promise.all([
             dispatch.bills.getBills(),
             dispatch.firefly.getNetWorth(),
@@ -323,49 +330,73 @@ function Bills() {
         />
       )}
     >
-      <AStack row>
-        <AText fontSize={25} lineHeight={27} style={{ margin: 15, flex: 1 }} bold>
-          {translate('home_bills')}
-        </AText>
+      <AText fontSize={25} lineHeight={27} style={{ margin: 15 }} bold>
+        {translate('home_bills')}
+      </AText>
+      {bills.map((bill) => {
+        const amountPaid = parseFloat(bill.attributes.currentPaidAmount || '0');
+        const amountMin = parseFloat(bill.attributes.amountMin);
+        const percentagePaid = (amountPaid / amountMin) * 100;
+        const isPaid = amountPaid >= amountMin;
 
-        {total !== 0 && (
+        const statusText = isPaid
+          ? `${translate('bills_paid')} ${formatDate(bill.attributes.nextExpectedMatch)}`
+          : amountPaid > 0
+            ? `${percentagePaid.toFixed(0)}%`
+            : `${translate('due_by')} ${formatDate(bill.attributes.nextExpectedMatch)}`;
+
+        return (
           <AStack
-            px={6}
-            py={2}
+            key={bill.id}
             mx={15}
-            backgroundColor={colors.brandSuccessLight}
-            style={{ borderRadius: 5 }}
+            style={{
+              height: 60,
+            }}
           >
-            <AText
-              fontSize={15}
-              numberOfLines={1}
-              color={colors.brandSuccess}
-              style={{ textAlign: 'center' }}
-              bold
-            >
-              {`${((totalPaid / total) * 100).toFixed(0)}%`}
-            </AText>
+            <AStackFlex row justifyContent="space-between">
+              <AStack
+                style={{ maxWidth: '80%' }}
+                alignItems="flex-start"
+              >
+                <AText fontSize={14} lineHeight={22} numberOfLines={1}>
+                  {bill.attributes.name}
+                </AText>
+                <AText fontSize={12} lineHeight={20} numberOfLines={1}>
+                  {localNumberFormat(bill.attributes.currencyCode, amountPaid)}
+                  {' / '}
+                  {localNumberFormat(bill.attributes.currencyCode, amountMin)}
+                </AText>
+              </AStack>
+
+              <ASkeleton loading={loading}>
+                <AStack alignItems="flex-end">
+                  <AStack
+                    px={6}
+                    py={2}
+                    backgroundColor={isPaid ? colors.brandSuccessLight : colors.brandNeutralLight}
+                    style={{ borderRadius: 5 }}
+                  >
+                    <AText
+                      fontSize={15}
+                      numberOfLines={1}
+                      color={isPaid ? colors.brandSuccess : colors.brandNeutral}
+                      style={{ textAlign: 'center' }}
+                      bold
+                    >
+                      {statusText}
+                    </AText>
+                  </AStack>
+                </AStack>
+              </ASkeleton>
+            </AStackFlex>
+
+            <AProgressBar
+              color={percentagePaid >= 50.0 ? colors.green : colors.brandWarning}
+              value={percentagePaid}
+            />
           </AStack>
-        )}
-      </AStack>
-
-      {total !== 0 && (
-        <AStack mx={15} justifyContent="flex-start">
-          <AProgressBar
-            color={colors.green}
-            value={(totalPaid / total) * 100}
-          />
-        </AStack>
-      )}
-
-      {bills.map((bill, index) => (
-        <BillListItem
-          key={bill.id}
-          bill={bill}
-          loading={loading}
-          lastItem={index + 1 === bills.length}
-        />
-      ))}
+        );
+      })}
       <AView style={{ height: 150 }} />
     </AScrollView>
   );

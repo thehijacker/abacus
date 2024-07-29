@@ -131,6 +131,11 @@ export default {
   transaction_clone: 'Clone',
   transaction_delete: 'Delete',
 
+  // from X.X.X
+  bills_paid: 'Đã trả đến',
+  due_by: 'Đến hạn',
+  date_unavailable: 'thông báo',
+
   // from 0.19.0
   configuration_theme: 'Tùy chỉnh',
   configuration_theme_selection: 'Thay đổi chủ đề màu',

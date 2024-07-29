@@ -63,6 +63,11 @@ export default {
   // from 0.7.0
   home_budgets: 'Presupuestos',
 
+  // from X.X.X
+  bills_paid: 'Pagado hasta',
+  due_by: 'Vence el',
+  date_unavailable: 'hasta nuevo aviso',
+
   // from 0.19.0
   configuration_theme: 'Personalización',
   configuration_theme_selection: 'Cambiar tema de color',

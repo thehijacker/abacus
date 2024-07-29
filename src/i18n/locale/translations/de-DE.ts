@@ -146,7 +146,9 @@ export default {
   // from X.X.X
   home_bills: 'Rechnungen',
   home_piggy_banks: 'Sparschweine',
-  bills_paid: 'Bezahlt',
+  bills_paid: 'Bezahlt bis',
+  due_by: 'Fällig bis',
+  date_unavailable: 'auf weiteres',
   bills_not_expected: 'Nicht erwartet',
   transaction_form_bill_label: 'Rechnung',
   configuration_transaction_form: 'Transaktionsformular',

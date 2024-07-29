@@ -8,23 +8,25 @@ export type BillType = {
   attributes: {
     name: string,
     active: boolean;
-    amountMin: string,
-    amountMax: string,
-    currencyId: string,
-    currencyCode: string,
-    currencySymbol: string,
-    nextExpectedMatch: string | null,
-    payDates: string[],
+    amountMin: string;
+    amountMax: string;
+    currencyId: string;
+    currencyCode: string;
+    currencySymbol: string;
+    nextExpectedMatch: string | null;
+    payDates: string[];
     paidDates: {
-      transactionGroupId: string,
-      transactionJournalId: string,
-      date: string,
-    }[],
+      transactionGroupId: string;
+      transactionJournalId: string;
+      date: string;
+      amount: string;
+    }[];
+    currentPaidAmount: string;
   },
 }
 
 type BillsStateType = {
-  bills: BillType[],
+  bills: BillType[];
 }
 
 const INITIAL_STATE = {
@@ -53,11 +55,6 @@ export default createModel<RootModel>()({
   },
 
   effects: (dispatch) => ({
-    /**
-     * Get bills
-     *
-     * @returns {Promise}
-     */
     async getBills(_: void, rootState): Promise<void> {
       const {
         firefly: {
@@ -70,9 +67,34 @@ export default createModel<RootModel>()({
 
       const { data: bills } = await dispatch.configuration.apiFetch({ url: `/api/v1/bills?start=${start}&end=${end}` }) as { data: BillType[] };
 
+      const { data: transactions } = await dispatch.configuration.apiFetch({ url: `/api/v1/transactions?start=${start}&end=${end}` }) as { data: TransactionType[] };
+
+      const billTransactions = transactions.reduce((acc, transaction) => {
+        transaction.attributes.transactions.forEach((split) => {
+          if (split.billId) {
+            if (!acc[split.billId]) {
+              acc[split.billId] = 0;
+            }
+            acc[split.billId] += parseFloat(split.amount);
+          }
+        });
+        return acc;
+      }, {});
+
       const filteredBills = [...bills]
         // Filter out inactive bills
         .filter((bill) => bill.attributes.active)
+        // Add the currentPaidAmount field
+        .map((bill) => {
+          const currentPaidAmount = billTransactions[bill.id] || 0;
+          return {
+            ...bill,
+            attributes: {
+              ...bill.attributes,
+              currentPaidAmount: currentPaidAmount.toString(),
+            },
+          };
+        })
         // Order by next expected date
         .sort((a, b) => moment(a.attributes.nextExpectedMatch).diff(moment(b.attributes.nextExpectedMatch)))
         // Make sure all paid bills are at the end of the list

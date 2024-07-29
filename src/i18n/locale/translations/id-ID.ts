@@ -86,6 +86,11 @@ export default {
   // from 0.7.0
   home_budgets: 'Anggaran',
 
+  // from X.X.X
+  bills_paid: 'Dibayar sampai',
+  due_by: 'Jatuh tempo',
+  date_unavailable: 'lebih lanjut',
+
   // from 0.19.0
   configuration_theme: 'Kustomisasi',
   configuration_theme_selection: 'Ganti tema warna',

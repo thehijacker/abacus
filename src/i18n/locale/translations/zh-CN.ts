@@ -131,6 +131,11 @@ export default {
   transaction_clone: '克隆',
   transaction_delete: '删除',
 
+  // from X.X.X
+  bills_paid: '支付到',
+  due_by: '到期',
+  date_unavailable: '另行通知',
+
   // from 0.19.0
   configuration_theme: '定制',
   configuration_theme_selection: '更改颜色主题',

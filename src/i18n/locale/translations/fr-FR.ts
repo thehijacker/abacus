@@ -146,7 +146,9 @@ export default {
   // from X.X.X
   home_bills: 'Factures',
   home_piggy_banks: 'Tirelires',
-  bills_paid: 'Payé',
+  bills_paid: 'Payé jusqu\'à',
+  due_by: 'Dû par',
+  date_unavailable: 'jusqu\'à nouvel ordre',
   bills_not_expected: 'Non attendu',
   transaction_form_bill_label: 'Facture',
   configuration_transaction_form: 'Formulaire',

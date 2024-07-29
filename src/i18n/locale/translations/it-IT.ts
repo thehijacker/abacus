@@ -143,7 +143,9 @@ export default {
 
   // from X.X.X
   home_bills: 'Bollette',
-  bills_paid: 'Pagato',
+  bills_paid: 'Pagato fino a',
+  due_by: 'Scadenza',
+  date_unavailable: 'ulteriore avviso',
   bills_not_expected: 'Non attesa',
   transaction_form_bill_label: 'Bolletta',
 
