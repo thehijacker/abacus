@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Dimensions, useColorScheme } from 'react-native';
+import {
+  View, TouchableOpacity, StyleSheet, Dimensions, useColorScheme,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { RootDispatch, RootState } from '../../store';

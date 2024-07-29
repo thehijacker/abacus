@@ -44,7 +44,7 @@ export default createModel<RootModel>()({
   },
 
   effects: (dispatch) => ({
-    async getPiggyBanks(_: void): Promise<void> {
+    async getPiggyBanks(): Promise<void> {
       const { data: piggyBanks } = await dispatch.configuration.apiFetch({ url: '/api/v1/piggy-banks' }) as {
         data: PiggyBank[]
       };

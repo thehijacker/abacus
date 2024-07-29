@@ -73,7 +73,7 @@ function AssetsAccounts() {
         return nameSortOrder === 'asc'
           ? a.attributes.name.localeCompare(b.attributes.name)
           : b.attributes.name.localeCompare(a.attributes.name);
-      } else if (balanceSortOrder) {
+      } if (balanceSortOrder) {
         return balanceSortOrder === 'asc'
           ? parseFloat(a.attributes.currentBalance) - parseFloat(b.attributes.currentBalance)
           : parseFloat(b.attributes.currentBalance) - parseFloat(a.attributes.currentBalance);
