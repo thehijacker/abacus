@@ -60,8 +60,8 @@ export default {
   navigation_create_tab: 'Izdelaj',
   navigation_transactions_tab: 'Transakcije',
   navigation_settings_tab: 'Nastavitve',
-  transaction_form_type_withdraw: 'Dvig',
-  transaction_form_type_deposit: 'Depozit',
+  transaction_form_type_withdraw: 'Odliv',
+  transaction_form_type_deposit: 'Priliv',
   transaction_form_type_transfer: 'Prenos',
 
   // from 0.4.1
